@@ -214,8 +214,13 @@ function PlayState:render()
 
     self.paddle:render()
     self.ball:render()
-    self.powerups:render()
 
+    if not self.powerups:collidesPowerBalls(self.paddle) then
+        self.powerups:renderPowerBalls()
+    end
+    if not self.powerups:collidesPowerKey(self.paddle) then
+        self.powerups:renderPowerKey()
+    end
 
     renderScore(self.score)
     renderHealth(self.health)
