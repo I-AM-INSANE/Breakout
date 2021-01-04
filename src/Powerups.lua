@@ -5,10 +5,10 @@ function Powerups:init()
     spawnPowerKey = false
 
     self.x_PowerBalls = math.random(16, 400)
-    self.y_PowerBalls = math.random(80, 110)
+    self.y_PowerBalls = math.random(80, 105)
 
     self.x_PowerKey = math.random(16, 400)
-    self.y_PowerKey = math.random(80, 110)
+    self.y_PowerKey = math.random(80, 105)
 
     self.width = 16
     self.height = 16
