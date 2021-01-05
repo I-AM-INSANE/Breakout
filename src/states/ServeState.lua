@@ -28,14 +28,26 @@ function ServeState:enter(params)
 
     -- init new ball (random color for fun)
     self.ball = Ball()
-    self.ball.skin = math.random(7)
+    self.ball2 = Ball()
+    self.ball3 = Ball()
+    self.ball.skin = math.random(2, 7)
 end
 
 function ServeState:update(dt)
-    -- have the ball track the player
+    
+    gBonusBalls = false
+
     self.paddle:update(dt)
     self.ball.x = self.paddle.x + (self.paddle.width / 2) - 4
     self.ball.y = self.paddle.y - 8
+
+    if gBonusBalls then
+        self.ball2.x = VIRTUAL_WIDTH / 2
+        self.ball2.y = VIRTUAL_HEIGHT - 50
+
+        self.ball3.x = VIRTUAL_WIDTH / 2
+        self.ball3.y = VIRTUAL_HEIGHT - 50
+    end
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         -- pass in all important state info to the PlayState
@@ -46,6 +58,8 @@ function ServeState:update(dt)
             score = self.score,
             highScores = self.highScores,
             ball = self.ball,
+            ball2 = self.ball2,
+            ball3 = self.ball3,
             level = self.level,
             recoverPoints = self.recoverPoints
         })

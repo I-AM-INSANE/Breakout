@@ -83,7 +83,7 @@ function LevelMaker.createMap(level)
                 -- flip the flag to true on an iteration we don't use it
                 skipFlag = not skipFlag
             end
-
+            
             b = Brick(
                 -- x-coordinate
                 (x-1)                   -- decrement x by 1 because tables are 1-indexed, coords are 0
@@ -94,7 +94,6 @@ function LevelMaker.createMap(level)
                 -- y-coordinate
                 y * 16                  -- just use y * 16, since we need top padding anyway
             )
-
             -- if we're alternating, figure out which color/tier we're on
             if alternatePattern and alternateFlag then
                 b.color = alternateColor1

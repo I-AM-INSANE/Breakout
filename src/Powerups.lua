@@ -17,12 +17,12 @@ function Powerups:init()
     self.dy_powerKey = 0
 
     self.timer = 0
-    self.removePowerBalls = false
-    self.removePowerKey = false
+    gBonusBalls = false
+    gBonusKey = false
 end
 
-local spawnTimePowerBalls = 2
-local spawnTimePowerKey = 3
+local spawnTimePowerBalls = math.random(3, 15)
+local spawnTimePowerKey = math.random(10,25)
 
 function Powerups:update(dt)
     self.timer = self.timer + dt
@@ -49,34 +49,36 @@ function Powerups:collidesPowerBalls(paddle)
     if self.x_powerBalls > paddle.x + paddle.width or paddle.x > self.x_powerBalls + self.width then
         return false
     end
-    if paddle.y > self.y_powerBalls + self.height then
+    if paddle.y > self.y_powerBalls + self.height or paddle.y < self.y_powerBalls - 8 then
         return false
     end 
 
-    self.removePowerBalls = true
+    gBonusBalls = true
+
     return true
+
 end
 
 function Powerups:collidesPowerKey(paddle)
     if self.x_powerKey > paddle.x + paddle.width or paddle.x > self.x_powerKey + self.width then
         return false
     end
-    if paddle.y > self.y_powerKey + self.height then
+    if paddle.y > self.y_powerKey + self.height or paddle.y < self.y_powerKey - 8 then
         return false
     end 
 
-    self.removePowerKey = true
+    gBonusKey = true
     return true
 end
 
 function Powerups:renderPowerBalls()
-    if spawnPowerBalls and not self.removePowerBalls then
+    if spawnPowerBalls and not gBonusBalls then
         love.graphics.draw(gTextures['main'], gFrames['powerups'][1], self.x_powerBalls, self.y_powerBalls)
     end
 end
 
 function Powerups:renderPowerKey()
-    if spawnPowerKey and not self.removePowerKey then
+    if spawnPowerKey and not gBonusKey then
         love.graphics.draw(gTextures['main'], gFrames['powerups'][2], self.x_powerKey, self.y_powerKey) 
     end
 end    

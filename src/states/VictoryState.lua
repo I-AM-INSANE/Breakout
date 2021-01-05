@@ -20,6 +20,8 @@ function VictoryState:enter(params)
     self.paddle = params.paddle
     self.health = params.health
     self.ball = params.ball
+    self.ball2 = params.ball2
+    self.ball3 = params.ball3
     self.recoverPoints = params.recoverPoints
 end
 
@@ -32,6 +34,7 @@ function VictoryState:update(dt)
 
     -- go to play screen if the player presses Enter
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gBonusBalls = false
         gStateMachine:change('serve', {
             level = self.level + 1,
             bricks = LevelMaker.createMap(self.level + 1),
